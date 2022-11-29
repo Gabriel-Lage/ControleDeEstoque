@@ -1,6 +1,6 @@
-algoritmo "semnome"
-// Função :
-// Autor :
+algoritmo "Controle de Estoque"
+// Função : Realizar o cadastro e controle de produtos em estoque de um estabelecimento
+// Autor : Vinicius Costa
 // Data : 24/11/2022
 // Seção de Declarações
 var
@@ -42,8 +42,7 @@ Leia(opc)
 // Seção de Comandos
 fimprocedimento
 
-inicio
-// Seção de Comandos
+Procedimento Menu
 repita
    LimpaTela
    Escreval("=================================")
@@ -82,6 +81,11 @@ repita
    fimescolha
 ate opcao=6
 Escreval ("Obrigado pela preferência, volte sempre!")
+fimprocedimento
+
+inicio
+// Seção de Comandos
+
 
 
 
