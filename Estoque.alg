@@ -1,6 +1,6 @@
 algoritmo "Controle de Estoque"
 // Função : Realizar o cadastro e controle de produtos em estoque de um estabelecimento
-// Autor : Vinicius Costa
+// Autor : Bruno Caetano, Edmar Pires, Gabriel Lage, Gustavo Barcario, Vinicius Costa
 // Data : 24/11/2022
 // Seção de Declarações
 var
