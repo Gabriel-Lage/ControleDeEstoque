@@ -8,8 +8,11 @@ opcao :inteiro
 opc : caracter
 descricao :vetor[1..100] de caracter
 quantidade :vetor[1..100] de inteiro
-precoCusto, precoVenda :vetor[1..100] de real
+precoCusto, precoVenda  :vetor[1..100] de real
 codItem :inteiro
+porcento : real
+i :inteiro
+
 
 Procedimento Apresentacao
 inicio
@@ -99,12 +102,13 @@ repita
    Escreval("==================================================================================")
    Escreval("|                               Sistema de Estoque                               |")
    Escreval("|                                                                                |")
-   Escreval("|                             1 - CADASTRAR PRODUTO                              |")
-   Escreval("|                             2 - EDITAR PRODUTO                                 |")
+   Escreval("|                             1 - PRODUTO                                        |")
+   Escreval("|                             2 - CONSULTAR ESTOQUE                              |")
    Escreval("|                             3 - PESQUISAR                                      |")
-   Escreval("|                             4 - VENDA DE PRODUTO                               |")
+   Escreval("|                             4 - VENDA                                          |")
    Escreval("|                             5 - RELATÓRIO DE VENDAS                            |")
    Escreval("|                             6 - SAIR                                           |")
+   Escreval("|                                                                                |")
    Escreval("|                                                                                |")
    Escreval("==================================================================================")
    Escreval()
@@ -112,12 +116,13 @@ repita
    Leia(opcao)
 
    Escolha (opcao)
+
    caso 1
       LimpaTela
       CadastrarProduto()
    caso 2
       LimpaTela
-      EditarProduto()
+      consultaEstoque()
    caso 3
       LimpaTela
       Pesquisar()
@@ -127,6 +132,7 @@ repita
    caso 5
       LimpaTela
       RelatorioVenda()
+
    caso 6
 
    fimescolha
@@ -161,8 +167,10 @@ Escreva("Digite a quantidade de produtos a cadastrar: ")
 leia(quantidade[codItem])
 escreva ("Preço de CUSTO: R$ ")
 leia (precoCusto[codItem])
-escreva ("Preço de VENDA: R$ ")
-leia (precoVenda[codItem])
+Escreva("Digite o percentual de lucro desejado: ")
+leia(porcento)
+precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento/100)
+
 
 LimpaTela
 escreval("==================================================================================")
@@ -173,10 +181,32 @@ escreval("Quantidade      :",quantidade[coditem])
 escreval("Custo           : R$ ",precoCusto[coditem]:1:2)
 escreval("Preço           : R$ ",precoVenda[coditem]:1:2)
 Escreval
-Escreval("Tecle enter para retornar ao menu")
+Escreval("Tecle enter para retornar ao menu ou 1 para cadastrar novo produto")
 Leia(opc)
+se (opc="1") entao
+   CadastrarProduto()
+fimse
 // Seção de Comandos
 fimprocedimento
+
+procedimento consultaEstoque()
+inicio
+limpatela
+Escreval("Possuem ", codItem," itens cadastrados" )
+escreval("Você possui no estoque os seguintes itens: ")
+para codItem de 1 ate codItem faca
+   escreval()
+   escreval("Código :",codItem)
+   escreval("Descrição : ",descricao[codItem])
+   escreval("Quantidade :",quantidade[codItem])
+   escreval("valor de custo : R$",precoCusto[codItem])
+   escreval("valor de venda : R$",precoVenda[codItem])
+   escreval("------------------------------------------")
+   escreval()
+fimpara
+escreva ("Pressione ENTER para voltar ao menu")
+leia(opc)
+fimProcedimento
 
 
 
@@ -188,3 +218,5 @@ inicio
 Menu()
 
 fimalgoritmo
+
+
