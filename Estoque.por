@@ -11,9 +11,6 @@ quantidade :vetor[1..100] de inteiro
 precoCusto, precoVenda  :vetor[1..100] de real
 codItem :inteiro
 porcento : real
-quantidadevenda, novaquantidade :inteiro
-
-
 
 Procedimento Apresentacao
 inicio
@@ -206,7 +203,7 @@ se (codItem = 0) entao
    escreva("Pressione ENTER para voltar ao menu...")
    leia (opc)
 senao
-   Escreval("Possuem", codItem," itens cadastrados" )
+   Escreval("Possui", codItem," item(s) cadastrado(s)" )
    escreval("Você possui no estoque os seguintes itens: ")
    para codItem de 1 ate codItem faca
       escreval()
@@ -225,68 +222,92 @@ senao
    senao
       Menu()
    fimse
-   fimProcedimento
+fimse
+fimProcedimento
 
-   procedimento pesquisarEditar()
-   inicio
-   limpatela
-   escreval("=================================================================================")
-   escreval("==                             Pesquisar/Editar                                ==")
-   escreval("=================================================================================")
+procedimento pesquisarEditar()
+inicio
+limpatela
+escreval("=================================================================================")
+escreval("==                             Pesquisar/Editar                                ==")
+escreval("=================================================================================")
+escreval
+se (codItem = 0) entao
+   escreval("Nenhum produto cadastrado!")
    escreval
-   se (codItem = "0") entao
-      escreval("Nenhum produto cadastrado!")
-      escreval
-      escreval("Para pesquisar e editar é necessario cadastrar um item!")
+   escreval("Para pesquisar e editar é necessario cadastrar um item!")
+   escreval()
+   escreval("Pressione ENTER para voltar ao menu...")
+   leia (opc)
+senao
+   escreval("Insira o código do produto que deseja pesquisar: ")
+   leia(codItem)
+   escreval
+   se(codItem >=1) E (codItem <= codItem) entao
+      escreval("Código :",codItem)
+      escreval("Descrição : ",descricao[codItem])
+      escreval("Quantidade :",quantidade[codItem])
+      escreval("Valor de venda : R$",precoVenda[codItem])
       escreval()
-      escreval("Pressione ENTER para voltar ao menu...")
-      leia (opc)
-   senao
-      escreval("Insira o código do produto que deseja pesquisar: ")
-      leia(codItem)
-      escreval
-      se(codItem >=1) E (codItem <= codItem) entao
-         escreval("Código :",codItem)
-         escreval("Descrição : ",descricao[codItem])
-         escreval("Quantidade :",quantidade[codItem])
-         escreval("Valor de venda : R$",precoVenda[codItem])
-         escreval()
-         Escreval("Editar (1) | Pesquisar Novamente (2) | Consultar Estoque (3) | Menu (ENTER)")
+      Escreval("Editar (1) | Pesquisar Novamente (2) | Consultar Estoque (3) | Menu (ENTER)")
+      leia(opc)
+      se (opc = "1") entao
+         escreval("=================================================================================")
+         escreval("==                                   Editar                                    ==")
+         escreval("=================================================================================")
+         escreval
+         Escreval("Nome (1) | Quantidade (2) | Preço de Custo (3) | Percentual (4)")
          leia(opc)
-         se (opc = "1") entao
-            escreval("=================================================================================")
-            escreval("==                                   Editar                                    ==")
-            escreval("=================================================================================")
-            escreval
-            escreva("Digite a nova quantidade para alterar o estoque: ")
-            leia(novaquantidade)
-            quantidade[codItem]:=novaquantidade
-            escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidades")
+         se(opc = "1") entao
+            escreva("Digite o novo nome do produto: ")
+            leia(descricao[codItem])
+            escreval("O nome do produto foi corrigido: ",descricao[codItem])
          senao
             se (opc = "2") entao
-               pesquisarEditar()
+               escreva("Digite a nova quantidade para alterar o estoque: ")
+               leia(quantidade[codItem])
+               escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidades")
+            senao
                se (opc = "3") entao
-                  consultaEstoque()
+                  escreva("Digite a atualização do preço de custo: ")
+                  leia(precoCusto[codItem])
+                  escreval("O produto ",descricao[codItem]," está com o valor de custo de R$ ",precoCusto[codItem]:1:2)
                senao
-                  menu()
+                  se (opc = "4") entao
+                     escreva("Digite o novo percentual de lucro desejado: ")
+                     leia(porcento)
+                     precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento/100)
+                     escreval("Percentual de lucro atualizado: ", porcento,"%")
+                  fimse
                fimse
             fimse
-            escreval()
-            Escreval("Pesquisar Novamente (1) | Menu (ENTER)")
-            Leia(opc)
-            se (opc="1") entao
-               pesquisarEditar()
+         fimse
+      senao
+         se (opc = "2") entao
+            pesquisarEditar()
+            se (opc = "3") entao
+               consultaEstoque()
+            senao
+               menu()
             fimse
          fimse
       fimse
-      fimprocedimento
+   fimse
+fimse
+escreval()
+Escreval("Pesquisar Novamente (1) | Menu (ENTER)")
+Leia(opc)
+se (opc="1") entao
+   pesquisarEditar()
+fimse
+fimprocedimento
 
 
-      inicio
-      // Seção de Comandos
-      apresentacao()
+inicio
+// Seção de Comandos
+//apresentacao()
 
-      Menu()
+Menu()
 
-   fimalgoritmo
+fimalgoritmo
 
