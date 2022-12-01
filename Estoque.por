@@ -9,8 +9,8 @@ opc : caracter
 descricao :vetor[1..50] de caracter
 quantidade :vetor[1..50] de inteiro
 precoCusto, precoVenda, porcento :vetor[1..50] de real
-codItem :inteiro
-
+codItem, vendaqtt :inteiro
+totalVenda :real
 
 Procedimento Apresentacao
 inicio
@@ -155,7 +155,7 @@ Escreval
 Escreval("=================================================================================")
 Escreval("|    __                                                                  __     |")
 Escreval("|   |..|                                                                |..|    |")
-Escreval("|  _|..|_          Todas as opções abaixo devem apenas números!!       _|..|_   |")
+Escreval("|  _|..|_         Todas as opções abaixo devem apenas números!!        _|..|_   |")
 Escreval("|  \..../                                                              \..../   |")
 Escreval("|   \../                                                                \../    |")
 Escreval("|    \/                                                                  \/     |")
@@ -176,8 +176,8 @@ Escreval("==                                   Resumo                           
 Escreval("=================================================================================")
 Escreval("Você cadastrou  : ",descricao[coditem])
 Escreval("Quantidade      :",quantidade[coditem])
-Escreval("Custo           : R$ ",precoCusto[coditem]:1:2)
-Escreval("Preço           : R$ ",precoVenda[coditem]:1:2)
+Escreval("Preço Custo     : R$ ",precoCusto[coditem]:1:2)
+Escreval("Preço Venda     : R$ ",precoVenda[coditem]:1:2)
 Escreval
 Escreval("Cadastrar novo produto (1) | Menu (ENTER)")
 Leia(opc)
@@ -202,8 +202,7 @@ se (codItem = 0) entao
    Escreva("Pressione ENTER para voltar ao menu...")
    leia (opc)
 senao
-   Escreval("Possui", codItem," item(s) cadastrado(s)" )
-   Escreval("Você possui no estoque os seguintes itens: ")
+   Escreval("Você possui no estoque", codItem, " itens: ")
    para codItem de 1 ate codItem faca
       Escreval
       Escreval("Código :",codItem)
@@ -302,6 +301,51 @@ se (opc="1") entao
 fimse
 fimprocedimento
 
+procedimento VendaProduto()
+inicio
+
+limpatela
+Escreval("=================================================================================")
+Escreval("==                                   VENDA                                     ==")
+Escreval("=================================================================================")
+Escreval
+
+se (codItem = 0) entao
+   Escreval("Nenhum produto cadastrado!")
+   Escreval
+   Escreval("Para realizar uma venda é necessario cadastrar um item!")
+   Escreval
+   Escreva("Pressione ENTER para voltar ao menu...")
+   leia (opc)
+senao
+   escreval("Insira o código do produto que deseja vender:")
+   leia(codItem)
+   se (codItem >=1) E (codItem <= codItem) entao
+      escreval("Descrição : ",descricao[codItem])
+      escreval("Quantidade : ",quantidade[codItem])
+      escreval("Valor de venda : R$",precoVenda[codItem], " por unidade")
+      escreval()
+      escreval("Quantas unidades deseja vender?")
+      leia (vendaqtt)
+      escreval()
+      escreval("Foram vendidas",vendaqtt," unidades por R$",precoVenda[codItem] * vendaqtt)
+      totalVenda := totalVenda + (precoVenda[codItem] * vendaqtt)
+      escreval()
+      quantidade[codItem] := quantidade[codItem] - vendaqtt
+      escreval("A quantidade de ",descricao[codItem]," foi atualizada!")
+      escreval()
+      Escreval("Realizar nova venda (1) | Consultar estoque (2) | Menu (ENTER)")
+      Leia(opc)
+      se (opc="1") entao
+         VendaProduto()
+      senao
+         se (opc="2") entao
+            consultaEstoque()
+         fimse
+      fimse
+   fimse
+fimse
+fimprocedimento
 
 inicio
 // seção de Comandos
