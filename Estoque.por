@@ -8,9 +8,9 @@ opcao :inteiro
 opc : caracter
 descricao :vetor[1..50] de caracter
 quantidade :vetor[1..50] de inteiro
-precoCusto, precoVenda, porcento :vetor[1..50] de real
-codItem, vendaqtt :inteiro
-totalVenda :real
+precoCusto, precoVenda, porcento, lucroProd, valorBruto, qttVenda:vetor[1..50] de real
+codItem, codItem1, vendaqtt :inteiro
+totalVenda, lucroTotal :real
 
 Procedimento Apresentacao
 inicio
@@ -143,6 +143,7 @@ procedimento CadastrarProduto
 inicio
 LimpaTela
 codItem:= codItem+1
+codItem1:= codItem1+1
 Escreval("=================================================================================")
 Escreval("==                             Cadastro de Produto                             ==")
 Escreval("=================================================================================")
@@ -327,9 +328,11 @@ senao
       escreval()
       escreval("Quantas unidades deseja vender?")
       leia (vendaqtt)
+      qttVenda[codItem] := qttVenda[codItem] + vendaqtt
       escreval()
       escreval("Foram vendidas",vendaqtt," unidades por R$",precoVenda[codItem] * vendaqtt)
       totalVenda := totalVenda + (precoVenda[codItem] * vendaqtt)
+      lucroProd[codItem] := (precoVenda[codItem] -  precoCusto[codItem]) * qttVenda[codItem]
       escreval()
       quantidade[codItem] := quantidade[codItem] - vendaqtt
       escreval("A quantidade de ",descricao[codItem]," foi atualizada!")
@@ -347,9 +350,55 @@ senao
 fimse
 fimprocedimento
 
+procedimento relatorioVenda()
+inicio
+limpatela
+Escreval("=================================================================================")
+Escreval("==                            Relatório Venda                                  ==")
+Escreval("=================================================================================")
+Escreval
+Escreval("Total de vendas: R$ ",totalVenda:1:2)
+lucroTotal:=0
+para codItem de 1 ate codItem1 faca
+   lucroTotal:= lucroTotal+LucroProd[codItem]
+fimpara
+
+Escreval("Total de lucro: R$ ", lucroTotal:1:2)
+se (totalVenda = 0) entao
+   Escreval("Nenhuma venda realizada!")
+   Escreval
+   Escreval("Para verificar o relatório de venda é necessario realizar uma venda!")
+   Escreval
+   Escreva("Pressione ENTER para voltar ao menu...")
+   leia (opc)
+senao
+
+   para codItem de 1 ate codItem1 faca
+      Escreval
+      Escreval("Código :",codItem)
+      Escreval("Descrição : ",descricao[codItem])
+      Escreval("Quantidade vendida: ", qttVenda[codItem])
+      Escreval("Valor de custo : R$",precoCusto[codItem])
+      Escreval("Valor de venda : R$",precoVenda[codItem])
+      Escreval("O lucro do ", descricao[codItem]," é de R$ ", lucroProd[codItem]:1:2)
+
+
+      Escreval
+      Escreval("------------------------------------------")
+   fimpara
+   Escreval("Editar (1) | Menu (ENTER)")
+   leia(opc)
+   se (opc = "1") entao
+      pesquisarEditar()
+   senao
+      Menu()
+   fimse
+fimse
+fimProcedimento
+
 inicio
 // seção de Comandos
-Apresentacao()
+//Apresentacao()
 
 Menu()
 
