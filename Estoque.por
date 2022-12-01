@@ -2,15 +2,15 @@ algoritmo "Controle de Estoque"
 // Função : Realizar o cadastro e controle de produtos em estoque de um estabelecimento
 // Autor : Bruno Caetano, Edmar Pires, Gabriel Lage, Gustavo Barcario, Vinicius Costa
 // Data : 24/11/2022
-// Seção de Declarações
+// seção de Declarações
 var
 opcao :inteiro
 opc : caracter
-descricao :vetor[1..100] de caracter
-quantidade :vetor[1..100] de inteiro
-precoCusto, precoVenda  :vetor[1..100] de real
+descricao :vetor[1..50] de caracter
+quantidade :vetor[1..50] de inteiro
+precoCusto, precoVenda, porcento :vetor[1..50] de real
 codItem :inteiro
-porcento : real
+
 
 Procedimento Apresentacao
 inicio
@@ -60,8 +60,7 @@ Escreval
 Escreval
 Escreval
 Escreval
-Escreval
-Escreva("Pressione enter para continuar...")
+Escreva("Pressione ENTER para continuar...")
 Leia(opc)
 
 LimpaTela
@@ -110,7 +109,7 @@ repita
    Escreval("|                             6 - Sair                                          |")
    Escreval("|                                                                               |")
    Escreval("=================================================================================")
-   Escreval()
+   Escreval
    Escreva("Digite a opção desejada: ")
    Leia(opcao)
 
@@ -140,80 +139,80 @@ Escreval ("Obrigado pela preferência, volte sempre!")
 fimprocedimento
 
 procedimento CadastrarProduto
-// Seção de Declarações Internas
+// seção de Declarações Internas
 inicio
 LimpaTela
 codItem:= codItem+1
-escreval("=================================================================================")
-escreval("==                             Cadastro de Produto                             ==")
-escreval("=================================================================================")
+Escreval("=================================================================================")
+Escreval("==                             Cadastro de Produto                             ==")
+Escreval("=================================================================================")
 Escreval
 Escreva("Digite o nome do produto: ")
 Leia(descricao[codItem])
 Escreval
 Escreval
 Escreval
-escreval("=================================================================================")
-escreval("|    __                                                                  __     |")
-escreval("|   |..|                                                                |..|    |")
-escreval("|  _|..|_          Todas as opções abaixo devem apenas números!!       _|..|_   |")
-escreval("|  \..../                                                              \..../   |")
-escreval("|   \../                                                                \../    |")
-escreval("|    \/                                                                  \/     |")
-escreval("=================================================================================")
+Escreval("=================================================================================")
+Escreval("|    __                                                                  __     |")
+Escreval("|   |..|                                                                |..|    |")
+Escreval("|  _|..|_          Todas as opções abaixo devem apenas números!!       _|..|_   |")
+Escreval("|  \..../                                                              \..../   |")
+Escreval("|   \../                                                                \../    |")
+Escreval("|    \/                                                                  \/     |")
+Escreval("=================================================================================")
 Escreval
 Escreva("Digite a quantidade de produtos a cadastrar: ")
 leia(quantidade[codItem])
-escreva ("Preço de CUSTO: R$ ")
+Escreva ("Preço de CUSTO: R$ ")
 leia (precoCusto[codItem])
 Escreva("Digite o percentual de lucro desejado: ")
-leia(porcento)
-precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento/100)
+leia(porcento[codItem])
+precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100)
 
 
 LimpaTela
-escreval("=================================================================================")
-escreval("==                                   Resumo                                    ==")
-escreval("=================================================================================")
-escreval("Você cadastrou  : ",descricao[coditem])
-escreval("Quantidade      :",quantidade[coditem])
-escreval("Custo           : R$ ",precoCusto[coditem]:1:2)
-escreval("Preço           : R$ ",precoVenda[coditem]:1:2)
+Escreval("=================================================================================")
+Escreval("==                                   Resumo                                    ==")
+Escreval("=================================================================================")
+Escreval("Você cadastrou  : ",descricao[coditem])
+Escreval("Quantidade      :",quantidade[coditem])
+Escreval("Custo           : R$ ",precoCusto[coditem]:1:2)
+Escreval("Preço           : R$ ",precoVenda[coditem]:1:2)
 Escreval
 Escreval("Cadastrar novo produto (1) | Menu (ENTER)")
 Leia(opc)
 se (opc="1") entao
    CadastrarProduto()
 fimse
-// Seção de Comandos
+// seção de Comandos
 fimprocedimento
 
 procedimento consultaEstoque()
 inicio
 limpatela
-escreval("=================================================================================")
-escreval("==                                  Estoque                                    ==")
-escreval("=================================================================================")
-escreval
+Escreval("=================================================================================")
+Escreval("==                                  Estoque                                    ==")
+Escreval("=================================================================================")
+Escreval
 se (codItem = 0) entao
-   escreval("Nenhum produto cadastrado!")
-   escreval
-   escreval("Para verificar o estoque é necessario cadastrar um item!")
-   escreval()
-   escreva("Pressione ENTER para voltar ao menu...")
+   Escreval("Nenhum produto cadastrado!")
+   Escreval
+   Escreval("Para verificar o estoque é necessario cadastrar um item!")
+   Escreval
+   Escreva("Pressione ENTER para voltar ao menu...")
    leia (opc)
 senao
    Escreval("Possui", codItem," item(s) cadastrado(s)" )
-   escreval("Você possui no estoque os seguintes itens: ")
+   Escreval("Você possui no estoque os seguintes itens: ")
    para codItem de 1 ate codItem faca
-      escreval()
-      escreval("Código :",codItem)
-      escreval("Descrição : ",descricao[codItem])
-      escreval("Quantidade :",quantidade[codItem])
-      escreval("valor de custo : R$",precoCusto[codItem])
-      escreval("valor de venda : R$",precoVenda[codItem])
-      escreval()
-      escreval("------------------------------------------")
+      Escreval
+      Escreval("Código :",codItem)
+      Escreval("Descrição : ",descricao[codItem])
+      Escreval("Quantidade :",quantidade[codItem])
+      Escreval("valor de custo : R$",precoCusto[codItem])
+      Escreval("valor de venda : R$",precoVenda[codItem])
+      Escreval
+      Escreval("------------------------------------------")
    fimpara
    Escreval("Editar (1) | Menu (ENTER)")
    leia(opc)
@@ -228,56 +227,57 @@ fimProcedimento
 procedimento pesquisarEditar()
 inicio
 limpatela
-escreval("=================================================================================")
-escreval("==                             Pesquisar/Editar                                ==")
-escreval("=================================================================================")
-escreval
+Escreval("=================================================================================")
+Escreval("==                             Pesquisar/Editar                                ==")
+Escreval("=================================================================================")
+Escreval
 se (codItem = 0) entao
-   escreval("Nenhum produto cadastrado!")
-   escreval
-   escreval("Para pesquisar e editar é necessario cadastrar um item!")
-   escreval()
-   escreval("Pressione ENTER para voltar ao menu...")
+   Escreval("Nenhum produto cadastrado!")
+   Escreval
+   Escreval("Para pesquisar e editar é necessario cadastrar um item!")
+   Escreval
+   Escreval("Pressione ENTER para voltar ao menu...")
    leia (opc)
 senao
-   escreval("Insira o código do produto que deseja pesquisar: ")
+   Escreval("Insira o código do produto que deseja pesquisar: ")
    leia(codItem)
-   escreval
+   Escreval
    se(codItem >=1) E (codItem <= codItem) entao
-      escreval("Código :",codItem)
-      escreval("Descrição : ",descricao[codItem])
-      escreval("Quantidade :",quantidade[codItem])
-      escreval("Valor de venda : R$",precoVenda[codItem])
-      escreval()
+      Escreval("Código :",codItem)
+      Escreval("Descrição : ",descricao[codItem])
+      Escreval("Quantidade :",quantidade[codItem])
+      Escreval("Valor de venda : R$",precoVenda[codItem])
+      Escreval
       Escreval("Editar (1) | Pesquisar Novamente (2) | Consultar Estoque (3) | Menu (ENTER)")
       leia(opc)
       se (opc = "1") entao
-         escreval("=================================================================================")
-         escreval("==                                   Editar                                    ==")
-         escreval("=================================================================================")
-         escreval
+         Escreval("=================================================================================")
+         Escreval("==                                   Editar                                    ==")
+         Escreval("=================================================================================")
+         Escreval
          Escreval("Nome (1) | Quantidade (2) | Preço de Custo (3) | Percentual (4)")
          leia(opc)
          se(opc = "1") entao
-            escreva("Digite o novo nome do produto: ")
+            Escreva("Digite o novo nome do produto: ")
             leia(descricao[codItem])
-            escreval("O nome do produto foi corrigido: ",descricao[codItem])
+            Escreval("O nome do produto foi corrigido: ",descricao[codItem])
          senao
             se (opc = "2") entao
-               escreva("Digite a nova quantidade para alterar o estoque: ")
+               Escreva("Digite a nova quantidade para alterar o estoque: ")
                leia(quantidade[codItem])
-               escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidades")
+               Escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidades")
             senao
                se (opc = "3") entao
-                  escreva("Digite a atualização do preço de custo: ")
+                  Escreva("Digite a atualização do preço de custo: ")
                   leia(precoCusto[codItem])
-                  escreval("O produto ",descricao[codItem]," está com o valor de custo de R$ ",precoCusto[codItem]:1:2)
+                  precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100)
+                  Escreval("O produto ",descricao[codItem]," está com o valor de custo de R$ ",precoCusto[codItem]:1:2)
                senao
                   se (opc = "4") entao
-                     escreva("Digite o novo percentual de lucro desejado: ")
-                     leia(porcento)
-                     precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento/100)
-                     escreval("Percentual de lucro atualizado: ", porcento,"%")
+                     Escreva("Digite o novo percentual de lucro desejado: ")
+                     leia(porcento[codItem])
+                     precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100)
+                     Escreval("Percentual de lucro atualizado: ", porcento[codItem],"%")
                   fimse
                fimse
             fimse
@@ -294,7 +294,7 @@ senao
       fimse
    fimse
 fimse
-escreval()
+Escreval
 Escreval("Pesquisar Novamente (1) | Menu (ENTER)")
 Leia(opc)
 se (opc="1") entao
@@ -304,8 +304,8 @@ fimprocedimento
 
 
 inicio
-// Seção de Comandos
-//apresentacao()
+// seção de Comandos
+Apresentacao()
 
 Menu()
 
