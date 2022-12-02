@@ -118,7 +118,8 @@ repita
    Escreval("|                             3 - Pesquisar/Editar                              |")
    Escreval("|                             4 - Vender Produto                                |")
    Escreval("|                             5 - Relatório de Vendas                           |")
-   Escreval("|                             6 - Sair                                          |")
+   Escreval("|                             6 - Créditos                                      |")
+   Escreval("|                             7 - Sair                                          |")
    Escreval("|                                                                               |")
    Escreval("=================================================================================")
    Escreval
@@ -147,10 +148,15 @@ repita
       LimpaTela
       RelatorioVenda()
 
-   caso 6 //Fecha o programa
-   fimescolha
-ate opcao=6
-Escreval ("Obrigado pela preferência, volte sempre!")
+   caso 6 //Seleciona no menu Créditos
+      LimpaTela
+      Creditos()
+
+   caso 7 //Fecha o programa
+      Escreval ("Obrigado pela preferência, volte sempre!")
+   fimalgoritmo
+fimescolha
+ate opcao=7
 
 fimprocedimento
 
@@ -215,7 +221,7 @@ Escreval("Cadastrar novo produto (1) | Menu (ENTER)")
 Leia(opc)
 
 se (opc="1") entao
-   CadastrarProduto()
+CadastrarProduto()
 fimse
 
 fimprocedimento
@@ -230,39 +236,39 @@ Escreval("======================================================================
 Escreval
 
 se (codItem1 = 0) entao //Condicional para não permitir consulta estoque se não tiver produto cadastrado
-   Escreval("Nenhum produto cadastrado!")
-   Escreval
+Escreval("Nenhum produto cadastrado!")
+Escreval
 
-   Escreval("Para verificar o estoque é necessario cadastrar um item!")
-   Escreval
+Escreval("Para verificar o estoque é necessario cadastrar um item!")
+Escreval
 
-   Escreva("Pressione (ENTER) para voltar ao menu...")
-   Leia (opc)
+Escreva("Pressione (ENTER) para voltar ao menu...")
+Leia (opc)
 
 senao
-   Escreval("Você possui no estoque", codItem1, " cadastro(s) de produto(s): ")
+Escreval("Você possui no estoque", codItem1, " cadastro(s) de produto(s): ")
 
-   para codItem de 1 ate codItem1 faca //Para percorrer todos os itens do vetor cadastrado
-      Escreval
+para codItem de 1 ate codItem1 faca //Para percorrer todos os itens do vetor cadastrado
+   Escreval
 
-      //Exibe os itens cadastrados e sua quantidade no estoque
-      Escreval("Código         :",codItem)
-      Escreval("Descrição      : ",descricao[codItem])
-      Escreval("Quantidade     :",quantidade[codItem])
-      Escreval("Valor de custo : R$ ",precoCusto[codItem]:1:2)
-      Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2)
-      Escreval
-      Escreval("------------------------------------------")
-   fimpara
+   //Exibe os itens cadastrados e sua quantidade no estoque
+   Escreval("Código         :",codItem)
+   Escreval("Descrição      : ",descricao[codItem])
+   Escreval("Quantidade     :",quantidade[codItem])
+   Escreval("Valor de custo : R$ ",precoCusto[codItem]:1:2)
+   Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2)
+   Escreval
+   Escreval("------------------------------------------")
+fimpara
 
-   Escreval("Editar (1) | Menu (ENTER)")
-   Leia(opc)
+Escreval("Editar (1) | Menu (ENTER)")
+Leia(opc)
 
-   se (opc = "1") entao
-      pesquisarEditar()
-   senao
-      Menu()
-   fimse
+se (opc = "1") entao
+   pesquisarEditar()
+senao
+   Menu()
+fimse
 fimse
 fimProcedimento
 
@@ -278,225 +284,285 @@ Escreval
 
 //Condicional para não permitir consulta estoque se não tiver produto cadastrado
 se (codItem = 0) entao
-   Escreval("Nenhum produto cadastrado!")
-   Escreval
-   Escreval("Para pesquisar e editar é necessario cadastrar um item!")
-   Escreval
+Escreval("Nenhum produto cadastrado!")
+Escreval
+Escreval("Para pesquisar e editar é necessario cadastrar um item!")
+Escreval
 
-   Escreval("Pressione (ENTER) para voltar ao menu...")
-   Leia (opc)
+Escreval("Pressione (ENTER) para voltar ao menu...")
+Leia (opc)
 
 senao
-   Escreva("Insira o código do produto que deseja pesquisar: ")
-   Leia(codItem)
+Escreva("Insira o código do produto que deseja pesquisar: ")
+Leia(codItem)
 
-   se (codItem > codItem1) entao
+se (codItem > codItem1) entao
+   Escreval
+   Escreval("O Código do item digitado não existe!")
+   Escreval("Pequise outro Código...")
+   timer(3000)
+   timer(0)
+   pesquisarEditar()
+
+senao
+   // Exibe o item pesquisado
+   Escreval("Código         :",codItem)
+   Escreval("Descrição      : ",descricao[codItem])
+   Escreval("Quantidade     :",quantidade[codItem])
+   Escreval("Valor de custo : R$ ",precoCusto[codItem]:1:2)
+   Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2)
+   Escreval
+
+   Escreval("Editar (1) | Pesquisar Novamente (2) | Consultar Estoque (3) | Menu (ENTER)")
+   Leia(opc)
+
+   se (opc = "1") entao
+      Escreval("=================================================================================")
+      Escreval("==                                   Editar                                    ==")
+      Escreval("=================================================================================")
       Escreval
-      Escreval("O Código do item digitado não existe!")
-      Escreval("Pequise outro Código...")
-      timer(3000)
-      timer(0)
-      pesquisarEditar()
 
-   senao
-      // Exibe o item pesquisado
-      Escreval("Código         :",codItem)
-      Escreval("Descrição      : ",descricao[codItem])
-      Escreval("Quantidade     :",quantidade[codItem])
-      Escreval("Valor de custo : R$ ",precoCusto[codItem]:1:2)
-      Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2)
-      Escreval
-
-      Escreval("Editar (1) | Pesquisar Novamente (2) | Consultar Estoque (3) | Menu (ENTER)")
+      Escreval("Nome (1) | Quantidade (2) | Preço de Custo (3) | Percentual (4)")
       Leia(opc)
 
-      se (opc = "1") entao
-         Escreval("=================================================================================")
-         Escreval("==                                   Editar                                    ==")
-         Escreval("=================================================================================")
-         Escreval
+      se(opc = "1") entao
+         Escreva("Digite o novo nome do produto: ")
+         Leia(descricao[codItem])
 
-         Escreval("Nome (1) | Quantidade (2) | Preço de Custo (3) | Percentual (4)")
-         Leia(opc)
+         Escreval("O nome do produto foi atualizado: ",descricao[codItem])
 
-         se(opc = "1") entao
-            Escreva("Digite o novo nome do produto: ")
-            Leia(descricao[codItem])
+      senao
+         se (opc = "2") entao
+            Escreva("Digite a nova quantidade para alterar o estoque: ")
+            Leia(quantidade[codItem])
 
-            Escreval("O nome do produto foi atualizado: ",descricao[codItem])
+            Escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidade(s)")
 
          senao
-            se (opc = "2") entao
-               Escreva("Digite a nova quantidade para alterar o estoque: ")
-               Leia(quantidade[codItem])
+            se (opc = "3") entao
+               Escreva("Digite a atualização do preço de custo: ")
+               Leia(precoCusto[codItem])
 
-               Escreval("O produto ",descricao[codItem]," agora possui ",quantidade[codItem]," unidade(s)")
+               precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100) //Calculo de Atualização de Custo
+
+               Escreval("O produto ",descricao[codItem]," está com o valor de custo de R$ ",precoCusto[codItem]:1:2)
 
             senao
-               se (opc = "3") entao
-                  Escreva("Digite a atualização do preço de custo: ")
-                  Leia(precoCusto[codItem])
+               se (opc = "4") entao
+                  Escreva("Digite o novo percentual de lucro desejado: ")
+                  Leia(porcento[codItem])
 
-                  precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100) //Calculo de Atualização de Custo
+                  precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100) //Calculo de Atualização de Percentual
 
-                  Escreval("O produto ",descricao[codItem]," está com o valor de custo de R$ ",precoCusto[codItem]:1:2)
-
-               senao
-                  se (opc = "4") entao
-                     Escreva("Digite o novo percentual de lucro desejado: ")
-                     Leia(porcento[codItem])
-
-                     precoVenda[codItem]:= precoCusto[codItem] + (precoCusto[codItem]*porcento[codItem]/100) //Calculo de Atualização de Percentual
-
-                     Escreval("Percentual de lucro atualizado: ", porcento[codItem],"%")
-                  fimse
-               fimse
-            fimse
-         senao
-            se (opc = "2") entao
-               pesquisarEditar()
-            senao
-               se (opc = "3") entao
-                  consultaEstoque()
-               senao
-                  menu()
+                  Escreval("Percentual de lucro atualizado: ", porcento[codItem],"%")
                fimse
             fimse
          fimse
       fimse
+   senao
+      se (opc = "2") entao
+         pesquisarEditar()
+      senao
+         se (opc = "3") entao
+            consultaEstoque()
+         senao
+            menu()
+         fimse
+      fimse
    fimse
+fimse
+fimse
 
+Escreval
+Escreval("Pesquisar Novamente (1) | Menu (ENTER)")
+Leia(opc)
+se (opc="1") entao
+pesquisarEditar()
+fimse
+fimprocedimento
+
+procedimento VendaProduto() //Responsável por Vender um produto no vetor
+
+inicio
+LimpaTela
+Escreval("=================================================================================")
+Escreval("==                                   VENDA                                     ==")
+Escreval("=================================================================================")
+Escreval
+
+se (codItem = 0) entao
+Escreval("Nenhum produto cadastrado!")
+Escreval
+Escreval("Para realizar uma venda é necessario cadastrar um item!")
+Escreval
+
+Escreva("Pressione (ENTER) para voltar ao menu...")
+Leia (opc)
+
+senao
+Escreva("Insira o código do produto que deseja vender: ")
+Leia(codItem)
+
+se (codItem > codItem1) entao
    Escreval
-   Escreval("Pesquisar Novamente (1) | Menu (ENTER)")
+   Escreval("O Código do item digitado não existe!")
+   Escreval("Digite outro Código...")
+   timer(3000)
+   timer(0)
+   VendaProduto()
+
+senao
+   //Exibe o item que sera vendido
+   Escreval("Descrição      : ",descricao[codItem])
+   Escreval("Quantidade     : ",quantidade[codItem])
+   Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2, " por unidade")
+   Escreval()
+   Escreval("Quantas unidades deseja vender?")
+
+   Escreva("Informe: ")
+   Leia (vendaqtt)
+
+   qttVenda[codItem] := qttVenda[codItem] + vendaqtt //Calcula quantidade total de vendas
+
+   Escreval()
+   Escreval("Vendido(s)",vendaqtt," unidade(s) por R$",precoVenda[codItem] * vendaqtt) //Calculo da vendas
+
+   totalVenda := totalVenda + (precoVenda[codItem] * vendaqtt) //Soma total de vendas
+
+   lucroProd[codItem] := (precoVenda[codItem] -  precoCusto[codItem]) * qttVenda[codItem] //Lucro total do produto
+
+   Escreval()
+   quantidade[codItem] := quantidade[codItem] - vendaqtt //Quantidade de venda produto
+
+   Escreval("A quantidade de ",descricao[codItem]," foi atualizada!")
+   Escreval()
+
+   Escreval("Realizar nova venda (1) | Consultar estoque (2) | Menu (ENTER)")
    Leia(opc)
+
    se (opc="1") entao
-      pesquisarEditar()
-   fimse
-   fimprocedimento
-
-   procedimento VendaProduto() //Responsável por Vender um produto no vetor
-
-   inicio
-   LimpaTela
-   Escreval("=================================================================================")
-   Escreval("==                                   VENDA                                     ==")
-   Escreval("=================================================================================")
-   Escreval
-
-   se (codItem = 0) entao
-      Escreval("Nenhum produto cadastrado!")
-      Escreval
-      Escreval("Para realizar uma venda é necessario cadastrar um item!")
-      Escreval
-      
-      Escreva("Pressione (ENTER) para voltar ao menu...")
-      Leia (opc)
+      VendaProduto()
 
    senao
-      Escreva("Insira o código do produto que deseja vender: ")
-      Leia(codItem)
-      
-      se (codItem > codItem1) entao
-         Escreval
-         Escreval("O Código do item digitado não existe!")
-         Escreval("Digite outro Código...")
-         timer(3000)
-         timer(0)
-         VendaProduto()
-
-      senao
-         //Exibe o item que sera vendido
-         Escreval("Descrição      : ",descricao[codItem])
-         Escreval("Quantidade     : ",quantidade[codItem])
-         Escreval("Valor de venda : R$ ",precoVenda[codItem]:1:2, " por unidade")
-         Escreval()
-         Escreval("Quantas unidades deseja vender?")
-         
-         Escreva("Informe: ")
-         Leia (vendaqtt)
-
-         qttVenda[codItem] := qttVenda[codItem] + vendaqtt //Calcula quantidade total de vendas
-
-         Escreval()
-         Escreval("Vendido(s)",vendaqtt," unidade(s) por R$",precoVenda[codItem] * vendaqtt) //Calculo da vendas
-
-         totalVenda := totalVenda + (precoVenda[codItem] * vendaqtt) //Soma total de vendas
-
-         lucroProd[codItem] := (precoVenda[codItem] -  precoCusto[codItem]) * qttVenda[codItem] //Lucro total do produto
-
-         Escreval()
-         quantidade[codItem] := quantidade[codItem] - vendaqtt //Quantidade de venda produto
-
-         Escreval("A quantidade de ",descricao[codItem]," foi atualizada!")
-         Escreval()
-
-         Escreval("Realizar nova venda (1) | Consultar estoque (2) | Menu (ENTER)")
-         Leia(opc)
-
-         se (opc="1") entao
-            VendaProduto()
-
-         senao
-            se (opc="2") entao
-               consultaEstoque()
-            fimse
-         fimse
+      se (opc="2") entao
+         consultaEstoque()
       fimse
-      fimprocedimento
+   fimse
+fimse
+fimse
+fimprocedimento
 
-      procedimento relatorioVenda() //Responsável por exibir relatório de venda
-      inicio
+procedimento relatorioVenda() //Responsável por exibir relatório de venda
+inicio
 
-      LimpaTela
-      Escreval("=================================================================================")
-      Escreval("==                            Relatório Venda                                  ==")
-      Escreval("=================================================================================")
-      Escreval
-      Escreval("Total de vendas: R$ ",totalVenda:1:2)
+LimpaTela
+Escreval("=================================================================================")
+Escreval("==                            Relatório Venda                                  ==")
+Escreval("=================================================================================")
+Escreval
+Escreval("Total de vendas: R$ ",totalVenda:1:2)
 
-      lucroTotal:=0 //Zera contador para recalcular o lucro total dos produtos
-      para codItem de 1 ate codItem1 faca
-         lucroTotal:= lucroTotal+LucroProd[codItem] //Cacula o lucro total do produto
-      fimpara
+lucroTotal:=0 //Zera contador para recalcular o lucro total dos produtos
+para codItem de 1 ate codItem1 faca
+lucroTotal:= lucroTotal+LucroProd[codItem] //Cacula o lucro total do produto
+fimpara
 
-      Escreval("Total de lucro: R$ ", lucroTotal:1:2)
+Escreval("Total de lucro: R$ ", lucroTotal:1:2)
 
-      se (totalVenda = 0) entao
-         Escreval("Nenhuma venda realizada!")
-         Escreval
-         Escreval("Para verificar o relatório de venda é necessario realizar uma venda!")
-         Escreval
+se (totalVenda = 0) entao
+Escreval("Nenhuma venda realizada!")
+Escreval
+Escreval("Para verificar o relatório de venda é necessario realizar uma venda!")
+Escreval
 
-         Escreva("Pressione (ENTER) para voltar ao menu...")
-         Leia (opc)
+Escreva("Pressione (ENTER) para voltar ao menu...")
+Leia (opc)
 
-      senao
-         para codItem de 1 ate codItem1 faca
-            Escreval
-            Escreval("Código            :",codItem)
-            Escreval("Descrição         : ",descricao[codItem])
-            Escreval("Quantidade vendida: ", qttVenda[codItem])
-            Escreval("Valor de custo    : R$ ",precoCusto[codItem]:1:2)
-            Escreval("Valor de venda    : R$ ",precoVenda[codItem]:1:2)
-            Escreval("O lucro do ", descricao[codItem]," é de R$ ", lucroProd[codItem]:1:2)
-            Escreval
-            Escreval("------------------------------------------")
-         fimpara
+senao
+para codItem de 1 ate codItem1 faca
+   Escreval
+   Escreval("Código            :",codItem)
+   Escreval("Descrição         : ",descricao[codItem])
+   Escreval("Quantidade vendida: ", qttVenda[codItem])
+   Escreval("Valor de custo    : R$ ",precoCusto[codItem]:1:2)
+   Escreval("Valor de venda    : R$ ",precoVenda[codItem]:1:2)
+   Escreval("O lucro do ", descricao[codItem]," é de R$ ", lucroProd[codItem]:1:2)
+   Escreval
+   Escreval("------------------------------------------")
+fimpara
 
-         Escreval("Editar (1) | Menu (ENTER)")
-         Leia(opc)
+Escreval("Editar (1) | Menu (ENTER)")
+Leia(opc)
 
-         se (opc = "1") entao
-            pesquisarEditar()
-         senao
-            Menu()
-         fimse
-      fimse
-      fimProcedimento
+se (opc = "1") entao
+   pesquisarEditar()
+senao
+   Menu()
+fimse
+fimse
+fimProcedimento
 
-      inicio
-      //Apresentacao()
-      Menu()
+procedimento Creditos() //Responsável por exibir os créditos do projeto
+inicio
 
-   fimalgoritmo
+LimpaTela
+timer(250)
+Escreval("       _____   _____    ______   _____    _____   _______    ____     ___   ")
+Escreval("      / ____| |  __ \  |  ____| |  __ \  |_   _| |__   __|  / __ \   / ____|")
+Escreval("     | |      | |__) | | |__    | |  | |   | |      | |    | |  | | | (___  ")
+Escreval("     | |      |  _  /  |  __|   | |  | |   | |      | |    | |  | |  \___ \ ")
+Escreval("     | |____  | | \ \  | |____  | |__| |  _| |_     | |    | |__| |  ____) |")
+Escreval("      \_____| |_|  \_\ |______| |_____/  |_____|    |_|     \____/  |_____/ ")
+Escreval("                                                                            ")
+Escreval("                                      Projeto                                ")
+Escreval("                                 ==SISTEMA ESTOQUE==                         ")
+Escreval("                                                                             ")
+Escreval("                                      Autores                                 ")
+Escreval("                                                                             ")
+Escreval("                                      Bruno Caetano                              ")
+Escreval("                                  Edmar Pires                               ")
+Escreval("                                      Gabriel Lage                               ")
+Escreval("                                  Gustavo Barcario                            ")
+Escreval("                                      Vinicius Costa                            ")
+Escreval("                                                                             ")
+Escreval("                               Professor: Rodrigo Vilela                       ")
+Escreval("                                                                            ")
+Escreval
+Escreval
+Escreval
+Escreval
+Escreval("                               OFERECIMENTO                              ")
+Escreval("                          # E S C O L A  T E C H                        ")
+Escreval("    G R U P O                                                            ")
+Escreval("        E N E R G I S A                                                  ")
+Escreval("               ----------------                                          ")
+Escreval("               -----------------                                         ")
+Escreval("                   --------------                                        ")
+Escreval("                       ----------                                        ")
+Escreval("                         --------                                        ")
+Escreval("                       -  ------     _____ ______ _   _          _____   ")
+Escreval("                    ----- -----     / ____|  ____| \ | |   /\   |_   _|  ")
+Escreval("                  -----   ----     | (___ | |__  |  \| |  /  \    | |    ")
+Escreval("                ------   ---        \___ \|  __| | . ` | / /\ \   | |    ")
+Escreval("               -------   -          ____) | |____| |\  |/ ____ \ _| |_   ")
+Escreval("               --------            |_____/|______|_| \_/_/    \_\_____|  ")
+Escreval("               ---------                                    CATAGUASES   ")
+Escreval("            -- -----------                                           ")
+Escreval("            --- ------------                                         ")
+Escreval("            ---- -------------                                       ")
+Escreval("            ---------------------                                    ")
+Escreval("             ----------------------                                  ")
+Escreval("             --------------------------                              ")
+Escreval("              -------------------------                              ")
+Escreval
+Escreva("Voltar ao Menu (ENTER)")
+Leia(opc)
+timer(0)
+fimprocedimento
+
+inicio
+Apresentacao()
+Menu()
+
+fimalgoritmo
 
